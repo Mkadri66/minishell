@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/03 17:00:58 by mkadri           ###   ########.fr       */
+/*   Created: 2024/09/03 16:07:16 by mkadri            #+#    #+#             */
+/*   Updated: 2024/09/03 17:12:25 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../minishell.h"
 
-# include "./libft/libft.h"
-# include <stdarg.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <ctype.h>
-# include <stddef.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+void    ft_pwd(char **cmd)
+{
+    char current_directory[1024];
 
-// Builtins
-
-void    ft_cd(char **cmd);
-void    ft_pwd(char **cmd);
-int     count_args(char **cmd);
-
-#endif
+    if(count_args(cmd) == 1)
+        printf("%s\n", getcwd(current_directory, sizeof(current_directory)));
+    else
+        printf("too many arguments\n");
+}

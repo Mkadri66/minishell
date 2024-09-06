@@ -1,16 +1,16 @@
 NAME = minishell
-SRCS = main.c $(wildcard builtins/*.c) $(wildcard libft/*.c)
+SRCS = main.c init_data.c test.c $(wildcard builtins/*.c) $(wildcard libft/*.c)
 OBJS = $(SRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-
+LDFLAGS = -lreadline
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJS)
@@ -20,4 +20,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re% 
+.PHONY: all clean fclean re

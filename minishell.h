@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/06 16:27:48 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/07 14:46:45 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 // Env Struct 
 
 typedef struct s_env_node {
-    char *env_name;
+    char *cmd;
+    char **arguments;
     struct s_env_node *prev;
     struct s_env_node *next;
 }   t_env_node;

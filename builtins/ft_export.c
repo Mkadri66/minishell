@@ -6,75 +6,88 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 14:47:36 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/06 17:17:52 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/14 11:36:21 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int correct_format(char *str)
+void update_env_list(char *env_var, t_env_node **env_list)
 {
-    char **split_str;
-    int     i;
-
-    split_str = ft_split(str, '=');
-    i = 0;
-    if(!(ft_isalpha(split_str[0][0])) && split_str[0][0] != '_')
-        return (1);
-    while(split_str[0][i])
-    {
-        if(!(ft_isalpha(split_str[0][i])) && split_str[0][i] != '_' && !(ft_isalnum(split_str[0][i])))
-            return (1);
-        i++;
-    }
-    free(split_str);
-    return(0);
-}
-
-int is_in_list(char *var, t_env_node **env_list)
-{
-    char **var_name_input;
-    char **var_name_env;
     t_env_node *current;
-
-    var_name_input = ft_split(var, '=');
+    char **split_var;
+    char **existing_var;
+    
+    if (!env_var)
+        return;
+    split_var = ft_split(env_var, '=');
+    if (!split_var || !split_var[0] || !split_var[1])
+    {
+        ft_free_split(split_var);
+        return;
+    }
     current = *env_list;
     while (current != NULL)
     {
-        var_name_env = ft_split(current->env_name, '=');
-        if(ft_strcmp(var_name_input[0], var_name_env[0]) == 0)
-            return (0);
-        ft_free_split(var_name_env);
+        existing_var = ft_split(current->env_name, '=');
+        if (ft_strcmp(existing_var[0], split_var[0]) == 0)
+        {
+            free(current->env_name);
+            current->env_name = ft_strjoin(split_var[0], "=");
+            current->env_name = ft_strjoin(current->env_name, split_var[1]);
+            ft_free_split(existing_var);
+            ft_free_split(split_var);
+            return;
+        }
+        ft_free_split(existing_var);
         current = current->next;
     }
-    ft_free_split(var_name_input);
-    return (1);
+    ft_free_split(split_var);
 }
 
-void    ft_export(char *input, t_env_node **env_list)
+static int correct_format(char *str)
 {
-    char **args;
-    
-    args = ft_split(input, ' ');
-    if (!args || !args[1])
+    int     i;
+
+    i = 0;
+    if(!(ft_isalpha(str[0])) && str[0] != '_')
+        return (1);
+    i++;
+    while(str[i] != '=')
     {
-        printf("argument error\n");
-        free(args);
+        if(!(ft_isalpha(str[i])) && str[i] != '_' && !(ft_isalnum(str[i])))
+            return (1);
+        i++;
+    }
+    if (str[i] != '=')
+        return (1);
+    return(0);
+}
+
+void    ft_export(char **args, t_env_node **env_list)
+{
+    int i;
+
+    i = 0;
+    if(!args)
+    {
+        ft_env(*env_list);
         return ;
     }
-    if (correct_format(args[1]) == 1)
-    {
-        printf("incorrect variable name\n");
-        free(args);
-        return ;
+    while(args[i])
+    {    
+        if (correct_format(args[i]) == 1)
+        {
+            printf("bash: export not a valid identifier\n");
+            ft_free_split(args);
+            return ;
+        }
+        if(is_in_list(args[i], env_list) == 0)
+        {
+            update_env_list(args[i], env_list);
+        } else
+            add_env_node(env_list, args[i]);
+        i++;
     }
-    else if(is_in_list(args[1], env_list) == 0)
-    {
-        printf("Update needed\n");
-        free(args);
-        return ;
-    }
-    //verifier si la variable n est pas vide
-    add_env_node(env_list, args[1]);
-    free(args);
+    ft_free_split(args);
 }

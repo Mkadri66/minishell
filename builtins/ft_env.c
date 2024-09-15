@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void    ft_env(t_env_node *env_node)
+void	ft_env(t_env_node *env_node)
 {
-    print_env_list(env_node);
+	print_env_list(env_node);
 }

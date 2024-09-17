@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:10:08 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/06 10:29:42 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/16 14:21:04 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	copy_env(t_data *data, char **env)
+static int	copy_env(t_data *data, char **env)
 {
 	int	i;
 
@@ -59,17 +59,22 @@ void	increase_shell_lvl(t_data *data)
 	}
 }
 
-int	init_data(t_data *data, char **env)
+int	init_data(t_data **data, char **env)
 {
-	data = malloc (sizeof (t_data));
+	*data = malloc (sizeof (t_data));
 	if (!data)
 		return (0);
-	if (!copy_env (data, env))
+	if (!copy_env (*data, env))
 		return (0);
-	increase_shell_lvl (data);
+	increase_shell_lvl (*data);
+//	print_env (data);
 	//copy STDIN
 	//copy STDOUT
-	data->token = NULL;
-	data->tree = NULL;
+	(*data)->token = NULL;
+	(*data)->tree = NULL;
+	(*data)->redir = NULL;
+	(*data)->new_input = NULL;
+	(*data)->d_quote = false;
+	(*data)->s_quote = false;
 	return (1);
 }

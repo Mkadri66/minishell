@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 22:11:49 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/05 23:00:20 by momillio         ###   ########.fr       */
+/*   Created: 2024/09/16 12:52:10 by momillio          #+#    #+#             */
+/*   Updated: 2024/09/16 15:30:34 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	parse_input(t_data *data, char *input)
+t_ast	*get_redir_type(char *str)
 {
-	int	i;
+	char *temp;
+	int	type;
+	t_ast	*node;
 
-	i = -1;
-	if (open_quotes (input) || unclosed_pipe (input))
-		return (1); //penser à faire les free
+	temp = str;
+	if (*temp == '<')
+	{
+		(*temp)++;
+		if (*temp == '<')
+			type = HEREDOC;
+		else
+			type == INP_REDIR;			
+	}
+	else if (*temp == '>')
+		{
+			(*temp)++;
+			if (*temp == '>')
+				type == APPEND;
+			else
+				type == OUT_REDIR;
+		}
+		node->content.cmd_node.
+	node = create_redir_node ();
+	return (node);
 }

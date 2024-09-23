@@ -6,27 +6,31 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 14:47:36 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/14 11:36:21 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/21 12:06:12 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void update_env_list(char *env_var, t_env_node **env_list)
+char **split_env_var(char *env_var)
 {
-    t_env_node *current;
     char **split_var;
-    char **existing_var;
-    
+
     if (!env_var)
-        return;
+        return NULL;
     split_var = ft_split(env_var, '=');
     if (!split_var || !split_var[0] || !split_var[1])
     {
         ft_free_split(split_var);
-        return;
+        return NULL;
     }
-    current = *env_list;
+    return split_var;
+}
+
+void update_existing_var(char **split_var, t_env_node *current)
+{
+    char **existing_var;
+
     while (current != NULL)
     {
         existing_var = ft_split(current->env_name, '=');
@@ -36,13 +40,11 @@ void update_env_list(char *env_var, t_env_node **env_list)
             current->env_name = ft_strjoin(split_var[0], "=");
             current->env_name = ft_strjoin(current->env_name, split_var[1]);
             ft_free_split(existing_var);
-            ft_free_split(split_var);
             return;
         }
         ft_free_split(existing_var);
         current = current->next;
     }
-    ft_free_split(split_var);
 }
 
 static int correct_format(char *str)

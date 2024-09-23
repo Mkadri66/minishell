@@ -27,7 +27,6 @@ char	*find_home_path(t_env_node *env_list)
 			return (current->env_name + prefix_len);
 		current = current->next;
 	}
-	
 	return (NULL);
 }
 
@@ -39,7 +38,7 @@ void	ft_cd(char **args, t_env_node **env_list)
 	getcwd(old_dir, sizeof(old_dir));
 	if (!args)
 	{
-		if(find_home_path(*env_list) != NULL)
+		if (find_home_path(*env_list) != NULL)
 			chdir(find_home_path(*env_list));
 		else
 			printf("Home path is not defined\n");
@@ -47,7 +46,7 @@ void	ft_cd(char **args, t_env_node **env_list)
 	}
 	if (chdir(args[0]) == 0)
 	{
-		if(is_in_list(ft_strjoin("OLDPWD=", old_dir), env_list) == 0)
+		if (is_in_list(ft_strjoin("OLDPWD=", old_dir), env_list) == 0)
 			update_env_list(ft_strjoin("OLDPWD=", old_dir), env_list);
 		else
 			add_env_node(env_list, ft_strjoin("OLDPWD=", old_dir));

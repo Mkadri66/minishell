@@ -6,11 +6,25 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:45:54 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/10 18:36:55 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/21 11:45:05 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+bool	is_empty_quotes(char *str)
+{
+	char	quote;
+
+	if (is_quotes(*str))
+	{
+		quote = *str;
+		str++;
+		if (*str == quote)
+			return (true);
+	}
+	return (false);
+}
 
 int	count_args(char **cmd)
 {

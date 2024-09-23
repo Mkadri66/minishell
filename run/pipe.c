@@ -12,9 +12,10 @@
 
 #include "../minishell.h"
 
-void	run_next_node_left(t_pipe *pipe_node, int *fd, t_data *data, t_env_node **env_list)
+void	run_next_node_left(t_pipe *pipe_node, int *fd,
+		t_data *data, t_env_node **env_list)
 {
-	t_redir *rnode;
+	t_redir	*rnode;
 
 	if (pipe_node->left->type == REDIR)
 	{
@@ -32,7 +33,9 @@ void	run_next_node_left(t_pipe *pipe_node, int *fd, t_data *data, t_env_node **e
 	run_tree(pipe_node->left, data, env_list);
 	exit(g_exit_status);
 }
-void	run_next_node_right(t_pipe *pipe_node, int *fd, t_data *data, t_env_node **env_list)
+
+void	run_next_node_right(t_pipe *pipe_node,
+		int *fd, t_data *data, t_env_node **env_list)
 {
 	t_redir	*rnode;
 
@@ -53,6 +56,7 @@ void	run_next_node_right(t_pipe *pipe_node, int *fd, t_data *data, t_env_node **
 	run_tree(pipe_node->left, data, env_list);
 	exit(g_exit_status);
 }
+
 int	wait_for_process(pid_t pid1)
 {
 	int	status;
@@ -68,7 +72,7 @@ int	wait_for_process(pid_t pid1)
 
 int	is_there_heredoc(t_ast *tree)
 {
-	t_redir *redir_node;
+	t_redir	*redir_node;
 
 	if (tree->type == CMD)
 		return (1);
@@ -87,29 +91,29 @@ int	is_there_heredoc(t_ast *tree)
 	return (1);
 }
 
-int    run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
+int	run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
 {
-    t_pipe  *pipe_node;
-    int     fd[2];
-    pid_t   pid1;
-    pid_t   pid2;
-    int     return_status;
+	t_pipe	*pipe_node;
+	int		fd[2];
+	pid_t	pid1;
+	pid_t	pid2;
+	int		return_status;
 
-    return_status = 0;
-    pipe_node = &tree->content.pipe_node;
-    if (pipe(fd) == -1)
-        ft_error("pipe");
-    pid1 = ft_fork();
-    if (pid1 == 0)
-        run_next_node_left(pipe_node, fd, data, env_list);
-    if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->type == REDIR)
-        return_status = wait_for_process(pid1);
-    pid2 = ft_fork();
-    if (pid2 == 0)
-        run_next_node_right(pipe_node, fd, data, env_list);
-    close(fd[0]);
-    close(fd[1]);
-    return_status = wait_for_process(pid1);
-    return_status = wait_for_process(pid2);
-    return(return_status);
+	return_status = 0;
+	pipe_node = &tree->content.pipe_node;
+	if (pipe(fd) == -1)
+		ft_error("pipe");
+	pid1 = ft_fork();
+	if (pid1 == 0)
+		run_next_node_left(pipe_node, fd, data, env_list);
+	if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->type == REDIR)
+		return_status = wait_for_process(pid1);
+	pid2 = ft_fork();
+	if (pid2 == 0)
+		run_next_node_right(pipe_node, fd, data, env_list);
+	close(fd[0]);
+	close(fd[1]);
+	return_status = wait_for_process(pid1);
+	return_status = wait_for_process(pid2);
+	return (return_status);
 }

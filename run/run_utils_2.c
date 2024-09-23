@@ -6,11 +6,17 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:29:59 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/22 13:16:13 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/23 21:24:21 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_error(char *error)
+{
+	perror(error);
+	exit(1);
+}
 
 void	handle_line(char *line, int file)
 {
@@ -47,6 +53,5 @@ void	dup_right(int *fd)
 {
 	close (fd[1]);
 	dup2(fd[0], 0);
-    close(fd[0]);
+	close(fd[0]);
 }
-	

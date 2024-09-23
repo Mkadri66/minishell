@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-void    ft_exit(char **args, t_env_node **env_list)
+void	ft_exit(char **args, t_env_node **env_list)
 {
-    ft_free_split(args);
-    free_env_list(*env_list);
-    exit(1);
+	ft_free_split(args);
+	free_env_list(*env_list);
+	exit (1);
 }

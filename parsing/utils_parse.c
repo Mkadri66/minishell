@@ -6,31 +6,31 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:39:31 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/14 12:07:00 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:33:50 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-bool	unclosed_pipe (char *input)
+bool	unclosed_pipe(char *input)
 {
 	int	i;
-	
+
 	i = -1;
 	while (input[++i])
 	{
 		if (input[i] == '|')
-			{
+		{
+			i++;
+			while (input[i] && ((input[i] >= 9 && input[i] <= 13) \
+					|| input[i] == 32))
 				i++;
-				while (input[i] && ((input[i] >= 9 && input[i] <= 13)
-				|| input[i] == 32))
-					i++;
-				if (input[i] == '|')
-					continue;
-				if (!input[i])
-					//message d'erreur "unclosed pipe"
-					return (true);
-			}
+			if (input[i] == '|')
+				continue ;
+			if (!input[i])
+				//message d'erreur "unclosed pipe"
+				return (true);
+		}
 	}
 	return (false);
 }
@@ -42,11 +42,10 @@ bool	is_whitespaces(char c)
 	return (false);
 }
 
-bool	is_quote(char c)
+void	skipe_whistepaces(char **str)
 {
-	if (c == '"' || c == '\'')
-		return (true);
-	return (false);
+	while (**str && is_whitespaces (**str))
+		(*str)++;
 }
 
 bool	is_symbol(char c)
@@ -59,8 +58,8 @@ bool	is_symbol(char c)
 char	*strjoin_char(char *src, char c)
 {
 	char	*str;
-	int	len;
-	int	i;
+	int		len;
+	int		i;
 
 	i = 0;
 	len = ft_strlen (src);

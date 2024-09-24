@@ -1,23 +1,46 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: momillio <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/09/20 15:34:09 by momillio          #+#    #+#              #
+#    Updated: 2024/09/20 15:54:09 by momillio         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
-SRCS = main.c $(wildcard builtins/*.c) $(wildcard libft/*.c) $(wildcard parsing/*.c)
+SRCS = main.c $(wildcard builtins/*.c) $(wildcard parsing/*.c)
 OBJS = $(SRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 LDFLAGS = -lreadline
+LIBFT_PATH = ./libft/libft.a
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
+all: _libft $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
+$(NAME): $(OBJS) $(LIBFT_PATH)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_PATH) -o $(NAME) $(LDFLAGS)
+	@echo "\033[1;32mCompilation succesfull !\033[0m"
 
 clean:
-	rm -f $(OBJS)
+	@make clean -s -C ./libft
+	@rm -f $(OBJS)
+	@echo "\033[1;31mClean succesfull ! \033[0m"
 
 fclean: clean
-	rm -f $(NAME)
+	@make fclean -s -C ./libft
+	@rm -f $(NAME)
+	@echo "\033[1;31mFclean succesfull ! \033[0m"
 
 re: fclean all
+
+_libft:
+	@make -s -C ./libft
+	@echo "\033[1;32mLibft compiled !\033[0m"
 
 .PHONY: all clean fclean re

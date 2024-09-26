@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:53:46 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 11:26:20 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:20:30 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	parse_input(t_data *data, char *input)
 	data->new_input = parse_line (input, data);
 	end_input = data->new_input + ft_strlen (data->new_input);
 	temp = data->new_input;
-	printf ("parsed : %s\n", data->new_input);
+//	printf ("parsed : %s\n", data->new_input);
 	tree = parse_pipe (&temp, end_input, data);
 	if (!tree)
 	{
@@ -140,6 +140,7 @@ int	parse_input(t_data *data, char *input)
 		return (1);
 	}
 	tree = nulterminate (tree, data);
-	parse_tree (tree);
+//	printf ("%sdata_cmd = %d\n%s", GREEN, data->nb_cmd, RESET);
+//	parse_tree (tree);
 	return (1);
 }

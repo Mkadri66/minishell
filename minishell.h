@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 14:30:51 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:00:46 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 
 extern int	g_exit_status;
 
+#define RED     "\033[0;31m"
+#define GREEN	"\033[1;32m"
+#define RESET   "\033[0m"
 # define MAX_ARGS 100
 
 typedef enum s_token_type
@@ -75,8 +78,6 @@ typedef struct s_dollar
 	char	*args[MAX_ARGS];
 	char	*e_args[MAX_ARGS];
 	bool	is_builtin;
-//	int	fd_in;
-//	int	fd_out;
  }	t_cmd;
 
  typedef struct s_pipe
@@ -94,6 +95,7 @@ typedef struct s_dollar
 	struct s_ast *cmd;
 	int	mode;
 	int fd;
+	bool	is_output;
  } t_redir;
 
 typedef union u_node_content

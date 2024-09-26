@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/24 11:39:11 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:21:16 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **env)
 			free_data (data); // free data, data.env
 		if (input_empty (input))
 		{
-			printf ("empty\n");
+//			printf ("empty\n");
 			continue ;
 		}
 		add_history (input);

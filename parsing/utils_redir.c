@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:44:43 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 12:27:35 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:18:07 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,37 +24,55 @@ void	init_redir(int type, t_ast *node)
 	{
 		node->content.redir_node.mode = O_RDONLY;
 		node->content.redir_node.fd = STDIN_FILENO;
+		node->content.redir_node.is_output = false;
 	}
 	if (type == OUT_REDIR)
 	{
 		node->content.redir_node.mode = O_RDWR | O_CREAT | O_TRUNC;
 		node->content.redir_node.fd = STDOUT_FILENO;
+		node->content.redir_node.is_output = true;
 	}
 	if (type == APPEND)
 	{
 		node->content.redir_node.mode = O_RDWR | O_CREAT | O_APPEND;
 		node->content.redir_node.fd = STDOUT_FILENO;
+		node->content.redir_node.is_output = true;
 	}
 }
 
 /* 
-	Check if there is multiple redirections.
+	Check if there is multiple same redirections.
 	If there is it will link the cmd to the newest redirection and
 	forget about the previous one.
 */
 
-t_ast	*multiple_redir(t_ast *old_redir, t_ast *new_redir)
+t_ast	*multiple_redir(t_ast *old, t_ast *new)
 {
-	printf ("here\n");
-	while (old_redir->content.redir_node.cmd->type == REDIR)
-		old_redir = old_redir->content.redir_node.cmd;
-	printf ("multi type = %d, filename = %s\n", old_redir->type, old_redir->content.redir_node.filename);
-	if (old_redir->content.redir_node.cmd->type == CMD)
+	t_ast	*temp;
+//	printf ("multiple redir function\n");	
+	if (old->content.redir_node.type == new->content.redir_node.type \
+		|| (old->content.redir_node.is_output == true 
+		&& new->content.redir_node.is_output == true))
 	{
-		new_redir->content.redir_node.cmd = old_redir->content.redir_node.cmd;
-		old_redir->content.redir_node.cmd = new_redir;
+//		printf ("inside if multiple redir\n");
+		new->content.redir_node.cmd = old->content.redir_node.cmd;
+//		if (old->content.redir_node.cmd->type == CMD)
+//		{
+//		new->content.redir_node.cmd = old->content.redir_node.cmd;
+		free (old);
+		return (new);
+//		}
 	}
-	return (old_redir);
+	temp = old->content.redir_node.cmd;
+	if (new->content.redir_node.type == temp->content.redir_node.type \
+		|| (new->content.redir_node.is_output == true 
+		&& temp->content.redir_node.is_output == true))
+	{
+//		printf ("inside if 3 redir\n");
+		old->content.redir_node.cmd = temp->content.redir_node.cmd;
+		free (temp);
+	}
+	return (new);
 }
 
 /*

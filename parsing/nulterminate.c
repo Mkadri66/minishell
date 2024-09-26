@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:24:04 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 13:00:05 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:29:46 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	nulterminate_cmd(t_ast *node, t_data *data)
 
 	i = 0;
 	data->nb_cmd += 1;
-	//printf ("here 1\n");
 	while (node->content.cmd_node.args[i])
 	{
 	//	printf ("here");
@@ -58,6 +57,7 @@ void	nulterminate_cmd(t_ast *node, t_data *data)
 
 t_ast	*nulterminate(t_ast *tree, t_data *data)
 {
+	data->nb_cmd = 0;
 	if (tree->type == CMD)
 		nulterminate_cmd (tree, data);
 	if (tree->type == PIPE)

@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:23:19 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 12:56:21 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:18:35 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,32 @@
 
 void	init_cmd(t_ast *node, char *s_token, char *e_token, int *i)
 {
-	node->content.cmd_node.args[*i] = s_token;
-	node->content.cmd_node.e_args[*i] = e_token;
+//	printf ("init_ptr before = %p\n", node);
+	t_ast	*temp;
+
+	temp = node;
+	if (temp->type == REDIR)
+	{
+	//	printf ("temp_ptr = %p\n", temp);
+	//	printf ("temp_cmd_type = %d\n", temp->type);
+		while (temp->type == REDIR)
+			temp = temp->content.redir_node.cmd;
+	//	printf ("temp_ptr after = %p\n", temp);
+	//	printf ("temp_cmd_type after = %d\n", temp->type);
+	//	node->content.redir_node.cmd->content.cmd_node.args[*i] = s_token;
+	//	node->content.redir_node.cmd->content.cmd_node.e_args[*i] = e_token;
+	}
+	if (temp->type == CMD)
+	{
+	//	printf ("inside init\n");
+	temp->content.cmd_node.args[*i] = s_token;
+	temp->content.cmd_node.e_args[*i] = e_token;
+	}
 	//*(node->content.cmd_node.e_args[*i]) = 0;
-	//printf ("cmd = %s\n", node->content.cmd_node.args[*i]);
+//	printf ("cmd = %s   i = %d\n", node->content.cmd_node.args[*i], *i);
 //	printf ("e_cmd = %s\n", (node->content.cmd_node.e_args[*i] - 1));
 	(*i)++;
+//	printf ("init_ptr after = %p\n", node);
 }
 
 /*
@@ -65,6 +85,10 @@ t_ast	*create_redir_node(int type, char *s_file, char *e_file, t_ast *cmd)
 	*(node->content.redir_node.e_filename) = 0;
 	node->content.redir_node.type = type;
 	node->content.redir_node.cmd = cmd;
+//	printf ("cmd ptr = %p\n", cmd);
+//	printf ("cmd type = %d\n", cmd->type);
+	if (cmd->type == REDIR)
+//		printf ("cmd_redir_type = %d\n", cmd->content.redir_node.type);
 	init_redir (type, node);
 	if (cmd->type == REDIR)
 		return (multiple_redir (cmd, node));

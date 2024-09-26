@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/26 11:00:46 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:58:55 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_dollar
  typedef struct s_cmd
  {
 	t_token_type type;
-	char	*name;
+//	char	*name;
 	char	*args[MAX_ARGS];
 	char	*e_args[MAX_ARGS];
 	bool	is_builtin;

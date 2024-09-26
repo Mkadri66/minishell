@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:23:19 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/26 12:18:35 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:06:37 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,11 @@ t_ast	*create_cmd_node(void)
 	if (!node)
 		return (NULL);
 	node->type = CMD;
-	ft_memset (&node->content.cmd_node, 0, sizeof (t_cmd));
+//	node->content.cmd_node.args = NULL;
+//	node->content.cmd_node.e_args = NULL;
+	node->content.cmd_node.is_builtin = false;
+	ft_memset (node->content.cmd_node.args, 0, sizeof (node->content.cmd_node.args));
+	ft_memset (node->content.cmd_node.e_args, 0, sizeof (node->content.cmd_node.e_args));
 	node->content.cmd_node.type = CMD;
 	return (node);
 }
@@ -85,6 +89,8 @@ t_ast	*create_redir_node(int type, char *s_file, char *e_file, t_ast *cmd)
 	*(node->content.redir_node.e_filename) = 0;
 	node->content.redir_node.type = type;
 	node->content.redir_node.cmd = cmd;
+	node->content.redir_node.mode = -1;
+	node->content.redir_node.fd = -1;
 //	printf ("cmd ptr = %p\n", cmd);
 //	printf ("cmd type = %d\n", cmd->type);
 	if (cmd->type == REDIR)

@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:01:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 11:22:57 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:50:37 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ char	*replace_dollar(char **input, t_data *data)
 			return (NULL);
 		ft_memset (dollar, 0, sizeof(t_dollar));
 		check_name (dollar, input);
-		if (search_env (dollar, data))
+		if (dollar->name && search_env (dollar, data))
 			data->new_input = copy_env (data, dollar);
 		free (dollar->name);
 		free (dollar);

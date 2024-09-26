@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:29:06 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/25 20:05:33 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:10:12 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_tree(t_ast *tree)
 	i = -1;
 	printf ("%snode type : %d\n%s", RED, tree->type, RESET);
 	printf ("node_ptr = %p\n", tree);
-	if (tree->type == CMD)
+	if (tree->type == CMD && tree->content.cmd_node.args[0])
 	{
 		while (tree->content.cmd_node.args[++i])
 			printf ("arg = %s\n", tree->content.cmd_node.args[i]);

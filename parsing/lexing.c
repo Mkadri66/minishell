@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:53:46 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/26 12:20:30 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:22:33 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*skip_quotes(char **str, t_data *data)
 	int		count;
 	char	quote;
 
+//	printf ("skip quote\n");
+//	printf ("char = %c\n", **str);
 	while (**str && is_quote (**str))
 	{
 		count = 0;
@@ -42,6 +44,7 @@ char	*skip_quotes(char **str, t_data *data)
 		while (**str == quote)
 		{
 			(*str)++;
+//			printf ("char in while = %c\n", **str);
 			count++;
 		}
 		if (count % 2)
@@ -54,6 +57,7 @@ char	*skip_quotes(char **str, t_data *data)
 					data->new_input = add_to_input (str, data->new_input);
 			}
 			(*str)++;
+//			printf ("char in if = %c\n", **str);
 		}
 	}
 	return (data->new_input);
@@ -68,6 +72,7 @@ char	*skip_quotes(char **str, t_data *data)
 
 char	*delimit_token(t_data *data, bool *token, char quote)
 {
+//	printf ("delimit token\n");
 	data->new_input = strjoin_char (data->new_input, quote);
 	*token = !*token;
 	return (data->new_input);
@@ -91,10 +96,14 @@ char	*parse_line(char *input, t_data *data)
 	skipe_whistepaces (&input);
 	while (*input)
 	{
-		if (contain_quote (data->new_input, &quote) && token == 0)
+//		printf("char = %c\n", *input);
+//		printf ("token = %d  quote = %c\n", token, quote);
+		if (token == 0 && contain_quote (input, &quote))
 			data->new_input = delimit_token (data, &token, quote);
+//		printf ("token after = %d  quote after = %c\n", token, quote);	
 		if (is_quote (*input))
 			data->new_input = skip_quotes (&input, data);
+//		printf ("input after skip = %s\n", data->new_input);
 		if (*input && !is_quote (*input))
 		{
 			if ((is_symbol (*input) || is_whitespaces (*input)) && token == 1)
@@ -104,7 +113,9 @@ char	*parse_line(char *input, t_data *data)
 			else
 				data->new_input = add_to_input (&input, data->new_input);
 		}
+//		printf ("input = %s\n", data->new_input);
 	}
+//	printf ("here\n");
 	if (token == 1)
 		data->new_input = delimit_token (data, &token, quote);
 	return (data->new_input);
@@ -141,6 +152,6 @@ int	parse_input(t_data *data, char *input)
 	}
 	tree = nulterminate (tree, data);
 //	printf ("%sdata_cmd = %d\n%s", GREEN, data->nb_cmd, RESET);
-//	parse_tree (tree);
+	parse_tree (tree);
 	return (1);
 }

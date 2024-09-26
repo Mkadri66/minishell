@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:24:04 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/24 18:29:46 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:05:30 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,19 @@ void	nulterminate_cmd(t_ast *node, t_data *data)
 	int	i;
 
 	i = 0;
-	data->nb_cmd += 1;
-	while (node->content.cmd_node.args[i])
+	if (node->content.cmd_node.args[i])
 	{
-	//	printf ("here");
+		data->nb_cmd += 1;
+		while (node->content.cmd_node.args[i])
+		{
+		//	printf ("here");
 		*(node->content.cmd_node.e_args[i]) = 0;
-	//	printf ("cmd = %s\n", node->content.cmd_node.args[i]);
-		i++;
+		//	printf ("cmd = %s\n", node->content.cmd_node.args[i]);
+			i++;
+		}
+		if (is_builtin (node->content.cmd_node.args[0]))
+			node->content.cmd_node.is_builtin = true;
 	}
-	if (is_builtin (node->content.cmd_node.args[0]))
-		node->content.cmd_node.is_builtin = true;
 }
 
 /* Nulterminate the different nodes. */

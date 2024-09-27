@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:29:59 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 11:41:43 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/26 18:46:48 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	run_next_node_left(t_pipe *pipe_node, int *fd,
 		}
 	}
 	close(fd[0]);
-	dup2(fd[1], 1);
+	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
 	run_tree(pipe_node->left, data, env_list);
 	exit(g_exit_status);
@@ -53,7 +53,7 @@ void	run_next_node_right(t_pipe *pipe_node,
 	}
 	else
 		dup_right(fd);
-	run_tree(pipe_node->left, data, env_list);
+	run_tree(pipe_node->right, data, env_list);
 	exit(g_exit_status);
 }
 
@@ -106,7 +106,7 @@ int	run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
 	pid1 = ft_fork();
 	if (pid1 == 0)
 		run_next_node_left(pipe_node, fd, data, env_list);
-	if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->type == REDIR)
+	if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->right->type == REDIR)
 		return_status = wait_for_process(pid1);
 	pid2 = ft_fork();
 	if (pid2 == 0)

@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 18:38:37 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/26 18:31:40 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	ft_fork(void)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("fork");
-		exit(1);
+		ft_error("fork");
 	}
 	return (pid);
 }
@@ -28,7 +27,7 @@ int	ft_fork(void)
 int	is_env_builtin(t_ast *tree)
 {
 	t_cmd	*exec_node;
-
+	
 	if (tree->type == CMD)
 	{
 		exec_node = &tree->content.cmd_node;
@@ -46,6 +45,7 @@ void	run_tree(t_ast *tree, t_data *data, t_env_node **env_list)
 {
 	int	return_status;
 
+	return_status = 0;
 	if (tree->type == CMD)
 		run_exec(tree, env_list);
 	else if (tree->type == REDIR)

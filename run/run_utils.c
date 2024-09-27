@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 21:24:17 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/24 11:22:00 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**allocate_env_copy(int size)
 {
 	char	**env_copy;
 
-	**env_copy = malloc((size + 1) * sizeof(char *));
+	env_copy = malloc((size + 1) * sizeof(char *));
 	if (!env_copy)
 	{
 		perror("Failed to allocate memory for env_copy");
@@ -88,7 +88,7 @@ char	**copy_env_list_to_array(t_env_node *env_list)
 		return (NULL);
 	if (!fill_env_copy(env_list, env_copy))
 	{
-		free_env_copy(env_copy);
+		ft_free_split(env_copy);
 		return (NULL);
 	}
 	return (env_copy);

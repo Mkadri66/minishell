@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 12:36:01 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/27 15:16:31 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,4 @@ void	run_builtins(char *cmd, char **args, t_env_node **env_list)
 		ft_echo(args, env_list);
 	else if (ft_strcmp(cmd, "exit") == 0)
 		ft_exit(args, env_list);
-	else
-		ft_strcmp(cmd, "");
 }

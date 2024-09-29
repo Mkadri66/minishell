@@ -106,7 +106,8 @@ int	run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
 	pid1 = ft_fork();
 	if (pid1 == 0)
 		run_next_node_left(pipe_node, fd, data, env_list);
-	if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->right->type == REDIR)
+	if (is_there_heredoc(pipe_node->left) == 0
+		|| pipe_node->right->type == REDIR)
 		return_status = wait_for_process(pid1);
 	pid2 = ft_fork();
 	if (pid2 == 0)

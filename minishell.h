@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/22 14:10:04 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/29 11:09:54 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <signal.h>
 # include <ctype.h>
 # include <signal.h>
 # include <sys/types.h>
@@ -150,6 +151,12 @@ void update_env_list(char *env_var, t_env_node **env_list);
 void remove_env_node(const char *var_name, t_env_node **env_list);
 void free_env_list(t_env_node *head);
 int is_in_list(char *var, t_env_node **env_list);
+int	replace_env_var(t_env_node *current, char **split_var);
+int is_shlvl_present(t_env_node **env_list);
+bool	valid_num_content(char *str);
+int increase_lvl(t_env_node **env_list);
+void increase_shell_lvl(t_env_node **env_list);
+
 
 // Builtins and utils
 
@@ -183,5 +190,7 @@ void	dup_right(int *fd);
 void	ft_heredoc(t_redir *redir_node);
 void	run_heredoc(t_redir *redir_node);
 void	reopen_stdin_stdout(int fd);
+void	check_builtin_and_run(t_ast *tree, t_data *data, t_env_node **env_list);
+
 
 #endif

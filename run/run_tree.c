@@ -27,7 +27,7 @@ int	ft_fork(void)
 int	is_env_builtin(t_ast *tree)
 {
 	t_cmd	*exec_node;
-	
+
 	if (tree->type == CMD)
 	{
 		exec_node = &tree->content.cmd_node;

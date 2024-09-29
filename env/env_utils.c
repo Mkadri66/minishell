@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:20:09 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 10:48:36 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/29 15:45:47 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	copy_env_to_list(t_env_node **head, char **envp)
 		return ;
 	while (*envp != NULL)
 	{
-		add_env_node(head, *envp);
+		if (add_env_node(head, *envp) == NULL)
+		{
+			free_env_list(*head);
+			exit(1);
+		}
 		envp++;
 	}
 	increase_shell_lvl(head);

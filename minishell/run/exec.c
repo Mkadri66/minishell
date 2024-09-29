@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 18:44:20 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:10:07 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	run_exec(t_ast *tree, t_env_node **env_list)
 	t_cmd	*cmd_node;
 	char	*path;
 	char	**env_copy;
-	int i = 0;
 
 	cmd_node = &tree->content.cmd_node;
 	if (cmd_node->is_builtin == true)
@@ -72,8 +71,6 @@ void	run_exec(t_ast *tree, t_env_node **env_list)
 		if (path == NULL)
 			exit (127);
 		env_copy = copy_env_list_to_array(*env_list);
-		while (env_copy[++i])
-			printf ("%s\n", env_copy[i]);
 		if (execve(cmd_node->args[0], cmd_node->args, env_copy) == -1)
 		{
 			if (execve(path, cmd_node->args, env_copy) == -1)

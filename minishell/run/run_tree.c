@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 17:34:16 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/29 19:15:41 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int	is_env_builtin(t_ast *tree)
 	if (tree->type == CMD)
 	{
 		exec_node = &tree->content.cmd_node;
-		if (ft_strcmp(exec_node->args[0], "cd")
-			|| ft_strcmp(exec_node->args[0], "export")
-			|| ft_strcmp(exec_node->args[0], "unset"))
+		//printf("commande node %s\n", exec_node->args[0]);
+		if (ft_strcmp(exec_node->args[0], "cd") == 0
+			|| ft_strcmp(exec_node->args[0], "export") == 0
+			|| ft_strcmp(exec_node->args[0], "unset") == 0)
 			return (1);
 		else
 			return (0);
@@ -87,6 +88,8 @@ void	check_builtin_and_run(t_ast *tree, t_data *data, t_env_node **env_list)
 		g_exit_status = 0;
 	}
 	else
+	{
 		fork_and_exec(tree, data, env_list);
+	}
 	return ;
 }

@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:24:04 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:08:53 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:05:30 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 bool	is_builtin(char *cmd)
 {

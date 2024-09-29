@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:23:19 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 16:32:31 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:06:37 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 /*
 	Fills the args variables of the cmd_node.
@@ -58,6 +58,8 @@ t_ast	*create_cmd_node(void)
 	if (!node)
 		return (NULL);
 	node->type = CMD;
+//	node->content.cmd_node.args = NULL;
+//	node->content.cmd_node.e_args = NULL;
 	node->content.cmd_node.is_builtin = false;
 	ft_memset (node->content.cmd_node.args, 0, sizeof (node->content.cmd_node.args));
 	ft_memset (node->content.cmd_node.e_args, 0, sizeof (node->content.cmd_node.e_args));

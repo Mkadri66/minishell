@@ -6,13 +6,13 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:10:08 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 15:48:55 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:25:22 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
-/*static int	copy_env(t_data *data, char **env)
+static int	copy_env(t_data *data, char **env)
 {
 	int	i;
 
@@ -40,9 +40,9 @@
 	}
 	data->env[i] = '\0';
 	return (1);
-}*/
+}
 
-/*void	increase_shell_lvl(t_data *data)
+void	increase_shell_lvl(t_data *data)
 {
 	int		i;
 	int		current_lvl;
@@ -58,28 +58,23 @@
 			data->env[i][6] = new_level;
 		}
 	}
-}*/
+}
 
-int	init_data(t_data **data, t_env_node **env_list, char **env, int argc)
+int	init_data(t_data **data, char **env)
 {
-	if (argc > 1)
-	{
-		printf ("The program doesn't require argument\n");
-		return (0);
-	}
 	*data = malloc (sizeof (t_data));
 	if (!data)
 		return (0);
-	copy_env_to_list (env_list, env);
-//	if (!copy_env (*data, env))
-//		return (0);
-//	increase_shell_lvl (*data);
+	if (!copy_env (*data, env))
+		return (0);
+	increase_shell_lvl (*data);
 //	print_env (data);
-	(*data)->env_list = env_list;
+	//copy STDIN
+	//copy STDOUT
+//	(*data)->token = NULL;
+//	(*data)->redir = NULL;
 	(*data)->new_input = NULL;
 	(*data)->nb_cmd = 0;
-	(*data)->stdin_cpy = dup (STDIN_FILENO);
-	(*data)->stdout_cpy = dup (STDOUT_FILENO);
 	(*data)->d_quote = false;
 	(*data)->s_quote = false;
 	return (1);

@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:19:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:09:15 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:34:12 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 /*int	is_single_quote(char *input, char **new_input, int index)
 {

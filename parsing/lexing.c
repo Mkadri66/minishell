@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:53:46 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 16:21:03 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:22:33 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 /* Add content char by char to the new input */
 
@@ -128,29 +128,30 @@ char	*parse_line(char *input, t_data *data)
 	Nulterminate the different nodes created in the parsing tree.
 */
 
-int	parse_input(t_data *data, char **input, t_ast **tree)
+int	parse_input(t_data *data, char *input)
 {
 	char	*end_input;
 	char	*temp;
+	t_ast	*tree;
 
 	data->new_input = ft_strdup ("");
 	if (!data->new_input)
-		return (0);
-	if (open_quotes (*input, data) || unclosed_pipe (*input))
-		return (free (input), 0);
-	data->new_input = parse_line (*input, data);
+		return (1);
+	if (open_quotes (input, data) || unclosed_pipe (input))
+		return (free (input), 1);
+	data->new_input = parse_line (input, data);
 	end_input = data->new_input + ft_strlen (data->new_input);
 	temp = data->new_input;
 //	printf ("parsed : %s\n", data->new_input);
-	*tree = parse_pipe (&temp, end_input, data);
-	if (!(*tree))
+	tree = parse_pipe (&temp, end_input, data);
+	if (!tree)
 	{
 		free_data (data);
 		free (input);
-		return (0);
+		return (1);
 	}
-	*tree = nulterminate (*tree, data);
+	tree = nulterminate (tree, data);
 //	printf ("%sdata_cmd = %d\n%s", GREEN, data->nb_cmd, RESET);
-//	parse_tree (tree);
+	parse_tree (tree);
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:01:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:08:43 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:50:37 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 /*
 	Copy the value of the environnement variable after the =.

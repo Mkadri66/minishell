@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:52:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:09:05 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:32:38 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 /*
 	Determine what kind of redirection it is.
 */

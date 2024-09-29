@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:44:43 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:09:20 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:18:07 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 /*
 	Intialize the variables of the redir_node.

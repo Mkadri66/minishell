@@ -6,11 +6,11 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:29:06 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/27 11:09:00 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:10:12 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../minishell.h"
 
 void	print_env(t_data *data)
 {

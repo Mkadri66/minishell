@@ -6,7 +6,7 @@
 /*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:29:59 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/23 12:18:57 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/29 13:57:17 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,13 @@ void	run_redir(t_ast *tree, t_data *data, t_env_node **env_list)
 	}
 	else
 	{
-		if (close(redir_node->fd) < 0)
+		if (redir_node->fd != -1 && close(redir_node->fd) < 0)
 			ft_error("close stdin/stdout failed");
-		if (open(redir_node->filename, redir_node->mode, 0777) < 0)
+		redir_node->fd = open(redir_node->filename, redir_node->mode, 0777);
+		if (redir_node->fd < 0)
 			ft_error(redir_node->filename);
+		if (dup2(redir_node->fd, STDOUT_FILENO) < 0)
+			ft_error("dup2 failed");
 	}
 	run_tree(redir_node->cmd, data, env_list);
 	reopen_stdin_stdout(redir_node->fd);

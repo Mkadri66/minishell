@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/30 15:59:58 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:33:46 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,23 @@ void	handle_input(t_data *data, t_env_node **env_list, char **input)
 	t_ast	*tree;
 	
 	tree = NULL;
-//	if (**input = 4)
-//		ft_exit ("exit", env_list);
-	add_history (*input);
-	if (!parse_input (data, input, &tree))
+	
+	if (*input[0] == 4)
+		ft_exit (input, data);
+	if (is_input_exit (*input, data) == 1)
 	{
-		free_all (&data, tree, input);
-		exit (1);
+		printf ("handle\n");
+		add_history (*input);
+		if (!parse_input (data, input, &tree))
+		{
+			free_all (&data, tree, input);
+			exit (1);
+		}
+		check_builtin_and_run (tree, data, env_list);
+		free_tree (tree);
+		free (data->new_input);
+		free (*input);	
 	}
-	check_builtin_and_run (tree, data, env_list);
-	free_tree (tree);
-	free (data->new_input);
-	free (*input);
 }
 
 int	main(int argc, char **argv, char **env)

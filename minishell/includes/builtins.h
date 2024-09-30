@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:17:46 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 17:06:33 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:00:54 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ bool	is_quotes(char c);
 void	ft_env(t_env_node *env_node);
 
 /* Ft_exit */
-void	ft_exit(char **args, t_env_node **env_list);
+int	is_input_exit(char *input, t_data *data);
+void	ft_exit(char **input, t_data *data);
 
 /* Ft_export */
 void	ft_export(char **args, t_env_node **env_list);

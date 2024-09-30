@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:51:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/30 16:42:56 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/09/30 17:24:24 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	is_input_exit(char *input, t_data *data)
 		{
 			printf("exit\n");
 			ft_exit(input_split, data);
+			exit (0);
 		}
 	}
 	ft_free_split(input_split);
@@ -59,6 +60,9 @@ int	arg_is_digit(char *str)
 
 void	ft_exit(char **input, t_data *data)
 {
-	free_all(&data, NULL, input);
+	printf ("ft_exit\n");
+	free (*input);
+	free_env_list (data->env_list);
+	free (data);
 	exit (0);
 }

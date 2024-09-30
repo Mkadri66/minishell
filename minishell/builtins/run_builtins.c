@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 15:59:54 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:58:58 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,4 @@ void	run_builtins(char *cmd, char **args, t_env_node **env_list)
 		ft_cd(args, env_list);
 	else if (ft_strcmp(cmd, "echo") == 0)
 		ft_echo(args, env_list);
-	else if (ft_strcmp(cmd, "exit") == 0)
-		ft_exit(args, env_list);
 }

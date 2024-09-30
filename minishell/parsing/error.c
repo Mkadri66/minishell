@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:19:54 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 17:23:15 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:21:00 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void	free_data(t_data *data)
 {
-	int	i;
-
-	i = -1;
 	if (data->env_list)
 		free_env_list (data->env_list);
 	if (data->new_input)

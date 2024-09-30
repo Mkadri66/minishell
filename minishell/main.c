@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/30 15:07:54 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:59:58 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int argc, char **argv, char **env)
 	g_exit_status = 0;
 	while (1)
 	{
+		set_signals();
 		input = readline ("Minishell: ");
 //      printf ("input = %s\n", input);
 		if (!input)

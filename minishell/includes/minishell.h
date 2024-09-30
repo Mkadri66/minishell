@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:10:29 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 16:30:46 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:59:36 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "../libft/libft.h"
-/*# include "parsing.h"
-# include "run.h"
-# include "builtins.h"*/
 
 extern int	g_exit_status;
 
@@ -39,6 +36,8 @@ extern int	g_exit_status;
 #define GREEN	"\033[1;32m"
 #define RESET   "\033[0m"
 # define MAX_ARGS 100
+
+void	set_signals(void);
 
 typedef enum s_token_type
 {

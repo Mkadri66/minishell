@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:19:54 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 17:26:38 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:02:59 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	free_all(t_data **data, t_ast *tree, char **input)
 		free_data (*data);
 	if (tree)
 		free_tree (tree);
+	exit (0);
 }
 
 int	error_exit(char *s)

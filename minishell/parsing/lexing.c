@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:53:46 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 15:25:00 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:02:17 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,6 @@ int	parse_input(t_data *data, char **input, t_ast **tree)
 		return (0);
 	*tree = nulterminate (*tree, data);
 //	printf ("%sdata_cmd = %d\n%s", GREEN, data->nb_cmd, RESET);
-	parse_tree (*tree);
+//	parse_tree (*tree);
 	return (1);
 }

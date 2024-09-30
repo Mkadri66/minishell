@@ -6,12 +6,12 @@
 #    By: momillio <momillio@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/20 15:34:09 by momillio          #+#    #+#              #
-#    Updated: 2024/09/29 16:05:19 by momillio         ###   ########.fr        #
+#    Updated: 2024/09/30 15:57:42 by momillio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
-SRCS = main.c $(wildcard builtins/*.c) $(wildcard parsing/*.c) $(wildcard run/*.c)
+SRCS = main.c signals.c $(wildcard builtins/*.c) $(wildcard parsing/*.c) $(wildcard run/*.c)
 OBJS = $(SRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iincludes

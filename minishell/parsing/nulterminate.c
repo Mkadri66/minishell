@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:24:04 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 15:02:35 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:03:46 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	is_builtin(char *cmd)
 		return (true);
 	else if (!ft_strncmp (cmd, "unset", 5) && !cmd[5])
 		return (true);
-	else if (!strncmp (cmd, "exit", 4) && !cmd[4])
+	else if (!ft_strncmp (cmd, "exit", 4) && !cmd[4])
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 18:20:09 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 17:58:33 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:29:12 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 void	print_env_list(t_env_node *head)
 {
 	t_env_node	*current;
+	int i = 0;
 
 	current = head;
 	while (current != NULL)
 	{
-		printf("%s\n", current->env_name);
+		printf("i= %d  %s\n", i, current->env_name);
 		current = current->next;
+		i++;
 	}
 }
 

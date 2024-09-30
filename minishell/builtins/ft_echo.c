@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:51:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 15:59:39 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:46:22 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ bool	check_option(char *option)
 	int	i;
 
 	i = 1;
-	if (option[0] != '-' || ft_strlen(option) < 2)
+	if (!option)
+		return (false);
+	if ((option[0] != '-' || ft_strlen(option) < 2))
 		return (false);
 	while (option[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 18:37:54 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:07:54 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	handle_input(t_data *data, t_env_node **env_list, char **input)
 	t_ast	*tree;
 	
 	tree = NULL;
+//	if (**input = 4)
+//		ft_exit ("exit", env_list);
 	add_history (*input);
 	if (!parse_input (data, input, &tree))
 	{

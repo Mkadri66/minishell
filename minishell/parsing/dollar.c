@@ -6,11 +6,12 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:01:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 17:25:39 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:49:34 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
+# include "../includes/builtins.h"
 
 /*
 	Copy the value of the environnement variable after the =.
@@ -21,9 +22,9 @@ char	*copy_env(t_data *data, t_dollar *dollar)
 	int	i;
 	t_env_node	*current;
 
-	i = 0;
+	i = -1;
 	current = (*data->env_list);
-	while (i < dollar->index)
+	while (++i < dollar->index)
 		current = current->next;
 	i = 0;
 	while (current->env_name[i] != '=')
@@ -31,7 +32,7 @@ char	*copy_env(t_data *data, t_dollar *dollar)
 	while (current->env_name[++i])
 		data->new_input = strjoin_char (data->new_input, \
 			current->env_name[i]);
-//	printf ("$ = %s\n", str);
+//	printf ("$ = %s\n", data->new_input);
 	return (data->new_input);
 }
 
@@ -47,16 +48,20 @@ bool	search_env(t_dollar *dollar, t_data *data)
 
 	i = 0;
 	current = (*data->env_list);
-//	print_env (data);
+//	print_env_list ((*data->env_list));
+//	printf ("name = %s len = %d\n", dollar->name, dollar->len);
 	while (current != NULL)
 	{
+//		printf ("current = %s\n", current->env_name);
 		if (ft_strncmp (dollar->name, current->env_name, dollar->len) == 0
 			&& current->env_name[dollar->len] == '=')
 		{
-			dollar->index = i + 1;
+			dollar->index = i;
 //				printf ("dollar index = %d\n", dollar->index);
 			return (true);
 		}
+		current = current->next;
+		i++;
 	}
 	return (false);
 }
@@ -101,7 +106,7 @@ void	check_name(t_dollar *dollar, char **input)
 								|| ((*input)[i] >= 'A' && (*input)[i] <= 'Z')
 								|| ((*input)[i] >= 'a' && (*input)[i] <= 'z')))
 		i++;
-//	printf ("dollar len = %d  str = %s\n", i, *input);
+	printf ("dollar len = %d  str = %s\n", i, *input);
 	dollar->len = i;
 	dollar->name = malloc (sizeof(char) * (dollar->len + 1));
 	if (!dollar->name)

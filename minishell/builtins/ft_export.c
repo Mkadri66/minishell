@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 14:47:36 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 15:59:47 by momillio         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:49:24 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,4 @@ void	ft_export(char **args, t_env_node **env_list)
 			add_env_node(env_list, args[i]);
 		i++;
 	}
-	ft_free_split(args);
 }

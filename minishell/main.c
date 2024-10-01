@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/01 19:24:17 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:43:31 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	handle_input(t_data *data, t_env_node **env_list, char **input)
 		check_builtin_and_run (tree, data, env_list);
 		free_tree (tree);
 		free (data->new_input);
-		free (*input);	
+		free (*input);
+//		print_tree (tree);
 	}
 }
 

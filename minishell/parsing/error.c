@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:19:54 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 18:21:00 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/10/01 20:18:41 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void	free_data(t_data *data)
 
 void	free_tree(t_ast *tree)
 {
+	
 	if (tree->type == CMD)
 		free (tree);
 	else if (tree->type == REDIR)
 	{
 		free_tree (tree->content.redir_node.cmd);
+		free (tree->content.redir_node.filename);
 		free (tree);
 	}
 	else if (tree->type == PIPE)

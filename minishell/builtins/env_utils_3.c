@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:53:46 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 18:02:08 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:39:41 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	increase_lvl(t_env_node **env_list)
 			{
 				shlvl = ft_atoi(split_shlvl[1]) + 1;
 				shlvl_char = ft_itoa(shlvl);
+				free (current->env_name);
 				current->env_name = ft_strjoin("SHLVL=", shlvl_char);
 			}
 			else

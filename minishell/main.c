@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/30 17:33:46 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:24:17 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,8 @@ void	handle_input(t_data *data, t_env_node **env_list, char **input)
 	
 	tree = NULL;
 	
-	if (*input[0] == 4)
-		ft_exit (input, data);
 	if (is_input_exit (*input, data) == 1)
 	{
-		printf ("handle\n");
 		add_history (*input);
 		if (!parse_input (data, input, &tree))
 		{
@@ -61,15 +58,13 @@ int	main(int argc, char **argv, char **env)
 
 	if (!init_data (&data, &env_list, env, argc))
 		return (1);
-//    print_env (data);
 	g_exit_status = 0;
 	while (1)
 	{
 		set_signals();
 		input = readline ("Minishell: ");
-//      printf ("input = %s\n", input);
 		if (!input)
-			continue ;
+			ft_exit (&input, data);
 		if (input_empty (input))
 			continue ;
 		handle_input (data, &env_list, &input);

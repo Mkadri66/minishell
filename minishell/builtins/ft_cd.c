@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:51:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 15:59:37 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:52:20 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_cd(char **args, t_env_node **env_list)
 	char	current_dir[1024];
 
 	getcwd(old_dir, sizeof(old_dir));
-	if (!args)
+	if (!args[0])
 	{
 		if (find_home_path(*env_list) != NULL)
 			chdir(find_home_path(*env_list));

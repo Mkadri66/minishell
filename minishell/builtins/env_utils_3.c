@@ -6,7 +6,7 @@
 /*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:53:46 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/01 19:39:41 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:45:47 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	valid_num_content(char *str)
 int	increase_lvl(t_env_node **env_list)
 {
 	t_env_node	*current;
-	char		**split_shlvl;
+//	char		**split_shlvl;
 	int			shlvl;
 	char		*shlvl_char;
 
@@ -49,17 +49,23 @@ int	increase_lvl(t_env_node **env_list)
 	{
 		if (ft_strncmp(current->env_name, "SHLVL=", 6) == 0)
 		{
-			split_shlvl = ft_split(current->env_name, '=');
+			if (valid_num_content (current->env_name + 6))
+			{
+				shlvl = ft_atoi (&current->env_name[6]) + 1;
+				shlvl_char = ft_itoa (shlvl);
+				current->env_name[6] = shlvl_char[0];			
+			}
+		/*	split_shlvl = ft_split(current->env_name, '=');
 			if (valid_num_content(split_shlvl[1]))
 			{
 				shlvl = ft_atoi(split_shlvl[1]) + 1;
 				shlvl_char = ft_itoa(shlvl);
 				free (current->env_name);
 				current->env_name = ft_strjoin("SHLVL=", shlvl_char);
-			}
+			}*/
 			else
-				current->env_name = "SHLVL=1";
-			ft_free_split(split_shlvl);
+				current->env_name = ft_strdup ("SHLVL=1");
+//			ft_free_split(split_shlvl);
 		}
 		current = current->next;
 	}

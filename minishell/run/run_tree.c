@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/02 10:47:59 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:02:30 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	run_tree(t_ast *tree, t_data *data, t_env_node **env_list)
 		run_redir(tree, data, env_list);
 	else if (tree->type == PIPE)
 		return_status = run_pipe(tree, data, env_list);
-	free_all (&data, tree, NULL);
-	exit (return_status);
+//	free_all (&data, tree, NULL);
+//	exit (return_status);
 }
 
 void	fork_and_exec(t_ast *tree, t_data *data, t_env_node **env_list)

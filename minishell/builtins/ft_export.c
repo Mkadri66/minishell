@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 14:47:36 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/30 15:49:24 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:03:58 by mkadri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_export(char **args, t_env_node **env_list)
 	int	i;
 
 	i = 0;
-	if (!args)
+	if (!args[0])
 	{
 		ft_env(*env_list);
 		return ;
@@ -81,7 +81,6 @@ void	ft_export(char **args, t_env_node **env_list)
 		if (correct_format(args[i]) == 1)
 		{
 			printf("bash: export not a valid identifier\n");
-			ft_free_split(args);
 			return ;
 		}
 		if (is_in_list(args[i], env_list) == 0)

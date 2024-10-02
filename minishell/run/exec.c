@@ -6,12 +6,13 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/02 11:01:26 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:19:35 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/run.h"
 #include "../includes/builtins.h"
+#include "../includes/parsing.h"
 
 char	*get_env_path(t_env_node *env_list)
 {
@@ -56,7 +57,7 @@ char	*get_path(t_cmd *cmd_node, t_env_node **env_list)
 	return (NULL);
 }
 
-void	run_exec(t_ast *tree, t_env_node **env_list)
+int	run_exec(t_ast *tree, t_env_node **env_list, t_data *data)
 {
 	t_cmd	*cmd_node;
 	char	*path;
@@ -69,7 +70,7 @@ void	run_exec(t_ast *tree, t_env_node **env_list)
 	{
 		path = get_path(cmd_node, env_list);
 		if (path == NULL)
-			exit (127);
+			return (free_all (&data, tree, NULL), 127);
 		env_copy = copy_env_list_to_array(*env_list);
 		if (execve(cmd_node->args[0], cmd_node->args, env_copy) == -1)
 		{
@@ -78,9 +79,9 @@ void	run_exec(t_ast *tree, t_env_node **env_list)
 				free(path);
 				ft_free_split(env_copy);
 				ft_error(cmd_node->args[0]);
-				exit (1);
+				return (1);
 			}
 		}
 	}
-//	free (tree);
+	return (0);
 }

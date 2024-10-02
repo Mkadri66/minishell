@@ -4,3 +4,24 @@
    ...
    obj:*/libreadline.so.*
 }
+
+{
+    ls-mem-Leak
+    Memcheck:Leak
+    ...
+    obj:*/usr/bin/ls*
+}
+
+{
+    cat-mem-Leak
+    Memcheck:Leak
+    ...
+    obj:*/usr/bin/cat*
+}
+
+{
+    clear-mem-Leak
+    Memcheck:Leak
+    ...
+    obj:*/usr/bin/clear*
+}

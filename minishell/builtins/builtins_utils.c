@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 16:45:54 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 15:57:03 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:45:07 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,16 @@ int	is_in_list(char *var, t_env_node **env_list)
 	{
 		var_name_env = ft_split(current->env_name, '=');
 		if (ft_strcmp(var_name_input[0], var_name_env[0]) == 0)
+		{
+			free (var);
+			ft_free_split (var_name_input);
+			ft_free_split (var_name_env);
 			return (0);
+		}
 		ft_free_split(var_name_env);
 		current = current->next;
 	}
+	free (var);
 	ft_free_split(var_name_input);
 	return (1);
 }

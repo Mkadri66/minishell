@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:01:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/10/02 10:23:35 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:26:36 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	check_name(t_dollar *dollar, char **input)
 								|| ((*input)[i] >= 'A' && (*input)[i] <= 'Z')
 								|| ((*input)[i] >= 'a' && (*input)[i] <= 'z')))
 		i++;
-	printf ("dollar len = %d  str = %s\n", i, *input);
 	dollar->len = i;
 	dollar->name = malloc (sizeof(char) * (dollar->len + 1));
 	if (!dollar->name)

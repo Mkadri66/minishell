@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:29:59 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/02 11:06:09 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:32:52 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	run_next_node_left(t_pipe *pipe_node, int *fd,
 	dup2(fd[1], 1);
 	close(fd[1]);
 	run_tree(pipe_node->left, data, env_list);
-//	exit(g_exit_status);
 }
 
 void	run_next_node_right(t_pipe *pipe_node,
@@ -55,20 +54,6 @@ void	run_next_node_right(t_pipe *pipe_node,
 	else
 		dup_right(fd);
 	run_tree(pipe_node->right, data, env_list);
-//	exit(g_exit_status);
-}
-
-int	wait_for_process(pid_t pid1)
-{
-	int	status;
-	int	return_status;
-
-	status = 0;
-	return_status = 0;
-	waitpid(pid1, &status, 0);
-	if (WIFEXITED(status))
-		return_status = WEXITSTATUS(status);
-	return (return_status);
 }
 
 int	is_there_heredoc(t_ast *tree)
@@ -92,12 +77,28 @@ int	is_there_heredoc(t_ast *tree)
 	return (1);
 }
 
+void	run_pipe_2(t_ast *tree, t_data *data, int *return_status, int *fd)
+{
+	t_pipe	*pipe_node;
+	pid_t	pid2;
+
+	pipe_node = &tree->content.pipe_node;
+	pid2 = ft_fork();
+	if (pid2 == 0)
+	{
+		run_next_node_right(pipe_node, fd, data, data->env_list);
+		free_all (&data, tree, NULL);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	*return_status = wait_for_process(pid2);
+}
+
 int	run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
 {
 	t_pipe	*pipe_node;
 	int		fd[2];
 	pid_t	pid1;
-	pid_t	pid2;
 	int		return_status;
 
 	return_status = 0;
@@ -112,15 +113,6 @@ int	run_pipe(t_ast *tree, t_data *data, t_env_node **env_list)
 	}
 	if (is_there_heredoc(pipe_node->left) == 0 || pipe_node->type == REDIR)
 		return_status = wait_for_process(pid1);
-	pid2 = ft_fork();
-	if (pid2 == 0)
-	{
-		run_next_node_right(pipe_node, fd, data, env_list);
-		free_all (&data, tree, NULL);
-	}
-	close(fd[0]);
-	close(fd[1]);
-//	return_status = wait_for_process(pid1);
-	return_status = wait_for_process(pid2);
+	run_pipe_2 (tree, data, &return_status, fd);
 	return (return_status);
 }

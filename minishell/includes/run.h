@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:45:21 by momillio          #+#    #+#             */
-/*   Updated: 2024/10/02 10:22:20 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:34:16 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "minishell.h"
 
 /* Exec */
-void	run_exec(t_ast *tree, t_env_node **env_list);
+int		run_exec(t_ast *tree, t_env_node **env_list, t_data *data);
 
 /* Pipe */
 int		run_pipe(t_ast *tree, t_data *data, t_env_node **env_list);
@@ -35,6 +35,7 @@ void	ft_error(char *error);
 void	handle_line(char *line, int file);
 int		is_line_delimiter(char *line, t_redir *redir_node);
 void	dup_right(int *fd);
+int		wait_for_process(pid_t pid1);
 
 /* Run_utils */
 int		get_env_list_size(t_env_node *env_list);

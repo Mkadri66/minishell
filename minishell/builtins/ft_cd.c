@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:51:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/01 20:52:20 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/10/02 11:50:44 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,34 @@ char	*find_home_path(t_env_node *env_list)
 	return (NULL);
 }
 
+t_env_node	*add_env_node_cd(t_env_node **head, char *env_name)
+{
+	t_env_node	*new_node;
+
+	new_node = (t_env_node *) malloc(sizeof(t_env_node));
+	if (!new_node)
+	{
+		free (env_name);
+		perror("Failed to allocate memory");
+		return (NULL);
+	}
+	new_node->env_name = ft_strdup(env_name);
+	if (!new_node->env_name)
+	{
+		free (env_name);
+		free(new_node);
+		perror("Failed to copy environment variable");
+		return (NULL);
+	}
+	new_node->next = *head;
+	new_node->prev = NULL;
+	if (*head != NULL)
+		(*head)->prev = new_node;
+	*head = new_node;
+	free (env_name);
+	return (new_node);
+}
+
 void	ft_cd(char **args, t_env_node **env_list)
 {
 	char	old_dir[1024];
@@ -49,7 +77,7 @@ void	ft_cd(char **args, t_env_node **env_list)
 		if (is_in_list(ft_strjoin("OLDPWD=", old_dir), env_list) == 0)
 			update_env_list(ft_strjoin("OLDPWD=", old_dir), env_list);
 		else
-			add_env_node(env_list, ft_strjoin("OLDPWD=", old_dir));
+			add_env_node_cd(env_list, ft_strjoin("OLDPWD=", old_dir));
 	}
 	else
 		printf("Path not found\n");

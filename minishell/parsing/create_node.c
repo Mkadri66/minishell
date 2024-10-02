@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:23:19 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 18:29:10 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:23:00 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,20 @@
 
 void	init_cmd(t_ast *node, char *s_token, char *e_token, int *i)
 {
-//	printf ("init_ptr before = %p\n", node);
 	t_ast	*temp;
 
 	temp = node;
 	if (temp->type == REDIR)
 	{
-	//	printf ("temp_ptr = %p\n", temp);
-	//	printf ("temp_cmd_type = %d\n", temp->type);
 		while (temp->type == REDIR)
 			temp = temp->content.redir_node.cmd;
-	//	printf ("temp_ptr after = %p\n", temp);
-	//	printf ("temp_cmd_type after = %d\n", temp->type);
-	//	node->content.redir_node.cmd->content.cmd_node.args[*i] = s_token;
-	//	node->content.redir_node.cmd->content.cmd_node.e_args[*i] = e_token;
 	}
 	if (temp->type == CMD)
 	{
-	//	printf ("inside init\n");
-	temp->content.cmd_node.args[*i] = s_token;
-	temp->content.cmd_node.e_args[*i] = e_token;
+		temp->content.cmd_node.args[*i] = s_token;
+		temp->content.cmd_node.e_args[*i] = e_token;
 	}
-	//*(node->content.cmd_node.e_args[*i]) = 0;
-//	printf ("cmd = %s   i = %d\n", node->content.cmd_node.args[*i], *i);
-//	printf ("e_cmd = %s\n", (node->content.cmd_node.e_args[*i] - 1));
 	(*i)++;
-//	printf ("init_ptr after = %p\n", node);
 }
 
 /*
@@ -59,8 +47,10 @@ t_ast	*create_cmd_node(void)
 		return (NULL);
 	node->type = CMD;
 	node->content.cmd_node.is_builtin = false;
-	ft_memset (node->content.cmd_node.args, 0, sizeof (node->content.cmd_node.args));
-	ft_memset (node->content.cmd_node.e_args, 0, sizeof (node->content.cmd_node.e_args));
+	ft_memset (node->content.cmd_node.args, 0, \
+	sizeof (node->content.cmd_node.args));
+	ft_memset (node->content.cmd_node.e_args, 0, \
+	sizeof (node->content.cmd_node.e_args));
 	node->content.cmd_node.type = CMD;
 	return (node);
 }
@@ -89,10 +79,6 @@ t_ast	*create_redir_node(int type, char *s_file, char *e_file, t_ast *cmd)
 	node->content.redir_node.cmd = cmd;
 	node->content.redir_node.mode = -1;
 	node->content.redir_node.fd = -1;
-//	printf ("cmd ptr = %p\n", cmd);
-//	printf ("cmd type = %d\n", cmd->type);
-//	if (cmd->type == REDIR)
-//		printf ("cmd_redir_type = %d\n", cmd->content.redir_node.type);
 	init_redir (type, node);
 	if (cmd->type == REDIR)
 		return (multiple_redir (cmd, node));

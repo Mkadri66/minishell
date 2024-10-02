@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:19:54 by momillio          #+#    #+#             */
-/*   Updated: 2024/10/01 21:34:28 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:24:00 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
-# include "../includes/builtins.h"
+#include "../includes/builtins.h"
 
 void	free_data(t_data *data)
 {
@@ -24,7 +24,6 @@ void	free_data(t_data *data)
 
 void	free_tree(t_ast *tree)
 {
-	
 	if (tree->type == CMD)
 		free (tree);
 	else if (tree->type == REDIR)

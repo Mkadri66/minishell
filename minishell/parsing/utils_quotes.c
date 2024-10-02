@@ -6,54 +6,11 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:19:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 16:00:39 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:08:17 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
-
-/*int	is_single_quote(char *input, char **new_input, int index)
-{
-	if (input[index] == '\'')
-	{
-		index++;
-		while (input[index] && input[index] != '\'')
-		{
-			if (input[index] == '"' && input[index + 1] == '"')
-			{
-				index += 2;
-				continue ;
-			}
-			*new_input = strjoin_char (*new_input, input[index]);
-//			printf ("Squotes : %s\n", *new_input);
-			index++;
-		}
-		index++;
-	}
-	return (index);
-}
-int	is_double_quotes(char *input, char **new_input, int index)
-{
-	if (input[index] == '"')
-	{
-		index++;
-		while (input[index] && input[index] != '"')
-		{
-			if (input[index] == '"' && input[index + 1] == '"')
-			{
-				index += 2;
-				continue ;
-			}
-//			if (input[index] == '$')
-//				replace_dollar (input, new_input, index);
-			*new_input = strjoin_char (*new_input, input[index]);
-//			printf ("Dquotes : %s\n", *new_input);
-			index++;
-		}
-		index++;
-	}
-	return (index);
-}*/
 
 bool	is_quote(char c)
 {
@@ -95,12 +52,11 @@ bool	open_quotes(char *input, t_data *data)
 	while (input[++i])
 	{
 		check_quotes (input[i], &(*data));
-//		printf ("SQ = %i  DQ = %i\n", data->s_quote, data->d_quote);	
 	}
 	if (data->s_quote || data->d_quote)
 	{
 		printf ("Quotes are open\n");
-		return (true); // gestion des free
+		return (true);
 	}
 	return (false);
 }

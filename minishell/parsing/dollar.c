@@ -6,12 +6,12 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:01:10 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 15:49:34 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:23:35 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
-# include "../includes/builtins.h"
+#include "../includes/builtins.h"
 
 /*
 	Copy the value of the environnement variable after the =.
@@ -19,7 +19,7 @@
 
 char	*copy_env(t_data *data, t_dollar *dollar)
 {
-	int	i;
+	int			i;
 	t_env_node	*current;
 
 	i = -1;
@@ -32,7 +32,6 @@ char	*copy_env(t_data *data, t_dollar *dollar)
 	while (current->env_name[++i])
 		data->new_input = strjoin_char (data->new_input, \
 			current->env_name[i]);
-//	printf ("$ = %s\n", data->new_input);
 	return (data->new_input);
 }
 
@@ -43,21 +42,17 @@ char	*copy_env(t_data *data, t_dollar *dollar)
 
 bool	search_env(t_dollar *dollar, t_data *data)
 {
-	int	i;
+	int			i;
 	t_env_node	*current;
 
 	i = 0;
 	current = (*data->env_list);
-//	print_env_list ((*data->env_list));
-//	printf ("name = %s len = %d\n", dollar->name, dollar->len);
 	while (current != NULL)
 	{
-//		printf ("current = %s\n", current->env_name);
 		if (ft_strncmp (dollar->name, current->env_name, dollar->len) == 0
 			&& current->env_name[dollar->len] == '=')
 		{
 			dollar->index = i;
-//				printf ("dollar index = %d\n", dollar->index);
 			return (true);
 		}
 		current = current->next;
@@ -117,7 +112,6 @@ void	check_name(t_dollar *dollar, char **input)
 		dollar->name[i] = **input;
 		(*input)++;
 	}
-//	printf ("input = %s\n", *input);
 	dollar->name[i] = '\0';
 }
 

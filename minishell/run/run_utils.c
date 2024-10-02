@@ -6,12 +6,12 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 17:44:18 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:27:10 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/run.h"
-# include "../includes/builtins.h"
+#include "../includes/builtins.h"
 
 int	get_env_list_size(t_env_node *env_list)
 {

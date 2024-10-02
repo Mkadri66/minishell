@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:29:59 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 18:22:28 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:08:52 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	run_heredoc(t_redir *redir_node)
 	file = open(".here_doc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (file < 0)
 		ft_error(redir_node->filename);
-//	setup_heredoc_signals();
 	while (1)
 	{
 		line = readline("> ");
@@ -81,8 +80,6 @@ void	run_redir(t_ast *tree, t_data *data, t_env_node **env_list)
 	}
 	else
 	{
-	//	if (redir_node->fd != -1 && close(redir_node->fd) < 0)
-	//		ft_error("close stdin/stdout failed");
 		redir_node->fd = open(redir_node->filename, redir_node->mode, 0777);
 		if (redir_node->fd < 0)
 			ft_error(redir_node->filename);

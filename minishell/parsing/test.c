@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 15:29:06 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 17:28:27 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:25:17 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	print_tree(t_ast *tree)
 		printf ("filename = %s\n", tree->content.redir_node.filename);
 		printf ("mode = %d\n", tree->content.redir_node.mode);
 		printf ("fd = %d\n", tree->content.redir_node.fd);
-		printf ("redir_cmd = %d,  %p\n", tree->content.redir_node.cmd->type, tree->content.redir_node.cmd);
+		printf ("redir_cmd = %d,  %p\n", tree->content.redir_node.cmd->type, \
+		tree->content.redir_node.cmd);
 	}
 	else if (tree->type == PIPE)
 	{

@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 22:39:31 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 16:00:37 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:08:00 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool	unclosed_pipe(char *input)
 			if (input[i] == '|')
 				continue ;
 			if (!input[i])
-				//message d'erreur "unclosed pipe"
 				return (true);
 		}
 	}
@@ -63,7 +62,6 @@ char	*strjoin_char(char *src, char c)
 
 	i = 0;
 	len = ft_strlen (src);
-//	printf ("len = %d\n", len);
 	str = malloc (sizeof (char) * (len + 2));
 	if (!str)
 	{

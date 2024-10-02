@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:44:43 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 18:29:51 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:26:20 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,20 @@ void	init_redir(int type, t_ast *node)
 t_ast	*multiple_redir(t_ast *old, t_ast *new)
 {
 	t_ast	*temp;
-//	printf ("multiple redir function\n");	
+
 	if (old->content.redir_node.type == new->content.redir_node.type \
-		|| (old->content.redir_node.is_output == true 
-		&& new->content.redir_node.is_output == true))
+	|| (old->content.redir_node.is_output == true
+			&& new->content.redir_node.is_output == true))
 	{
-//		printf ("inside if multiple redir\n");
 		new->content.redir_node.cmd = old->content.redir_node.cmd;
-//		if (old->content.redir_node.cmd->type == CMD)
-//		{
-//		new->content.redir_node.cmd = old->content.redir_node.cmd;
 		free (old);
 		return (new);
-//		}
 	}
 	temp = old->content.redir_node.cmd;
 	if (new->content.redir_node.type == temp->content.redir_node.type \
-		|| (new->content.redir_node.is_output == true 
-		&& temp->content.redir_node.is_output == true))
+		|| (new->content.redir_node.is_output == true
+			&& temp->content.redir_node.is_output == true))
 	{
-//		printf ("inside if 3 redir\n");
 		old->content.redir_node.cmd = temp->content.redir_node.cmd;
 		free (temp);
 	}

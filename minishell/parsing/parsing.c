@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 10:53:03 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 16:00:31 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:25:05 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,15 @@ t_ast	*parse_redir(t_ast *node, char **s_input, char *e_input)
 	char	*s_file;
 	char	*e_file;
 
-//	printf ("parse_redir\n");
 	while (peek(s_input, e_input, "<>"))
 	{
-//		printf ("inside while redir\n");
 		token = get_token (s_input, e_input, 0, 0);
-//		printf ("get_token 1 = %s\n", *s_input);
 		if (get_token (s_input, e_input, &s_file, &e_file) != CMD)
 		{
 			free (node);
-			return (NULL); // message d'erreur
+			return (NULL);
 		}
-//		printf ("get_token 2 = %s\n", *s_input);
-//		printf ("s =%c  e =%c\n", *s_file, *e_file - 1);
-//		printf ("s =%s  e =%s\n", s_file, e_file);
 		node = create_redir_node (token, s_file, e_file, node);
-//		printf ("%sredir_ptr = %p\n%s", RED, node, RESET);
 	}
 	return (node);
 }
@@ -67,40 +60,25 @@ t_ast	*parse_exec(char **s_input, char *e_input)
 
 	i = 0;
 	node = create_cmd_node();
-//	printf ("cmd_node_ptr = %p\n", node);
 	node = parse_redir (node, s_input, e_input);
-//	printf ("redir_cmd_ptr 1 = %p\n", node->content.redir_node.cmd);
 	if (!node)
 		return (NULL);
 	while (!peek (s_input, e_input, "|"))
 	{
 		if (get_token (s_input, e_input, &s_token, &e_token) == -1)
 			break ;
-//		printf ("get_token 3 = %s\n", *s_input);
-//		printf ("%sredir_ptr before init = %p\n%s", RED, node, RESET);
-//		printf ("redir_cmd_ptr before init = %p\n", node->content.redir_node.cmd);
 		init_cmd (node, s_token, e_token, &i);
-//		printf ("redir_cmd_ptr after init = %p\n", node->content.redir_node.cmd);
-//		printf ("%sredir_ptr after init = %p\n%s", RED, node, RESET);
-
 		if (i > MAX_ARGS)
 		{
 			printf ("Too many arguments\n");
 			return (NULL);
 		}
-//		printf ("redir_cmd_ptr before function = %p\n", node->content.redir_node.cmd);
 		node = parse_redir (node, s_input, e_input);
-//		printf ("redir_cmd_ptr 2 = %p\n", node->content.redir_node.cmd);
 		if (!node)
 			return (NULL);
 	}
-	/*printf ("%stype = %d\n%s", RED, node->type, RESET);
-	printf ("cmd_type = %d\n", node->content.redir_node.cmd->type);
-	printf ("redir_cmd_ptr 3 = %p\n", node->content.redir_node.cmd);
-	printf ("%snode_ptr = %p\n%s", RED, node, RESET)*/
 	return (node);
 }
-
 /*
 	Parse the input and check if there is | in it.
 	Call the parse_exec function first because there should be a command before

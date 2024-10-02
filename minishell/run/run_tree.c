@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   run_tree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkadri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/09/29 19:15:41 by mkadri           ###   ########.fr       */
+/*   Updated: 2024/10/02 10:27:18 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/run.h"
-# include "../includes/builtins.h"
+#include "../includes/builtins.h"
+#include "../includes/parsing.h"
 
 int	ft_fork(void)
 {
@@ -33,7 +34,6 @@ int	is_env_builtin(t_ast *tree)
 	if (tree->type == CMD)
 	{
 		exec_node = &tree->content.cmd_node;
-		//printf("commande node %s\n", exec_node->args[0]);
 		if (ft_strcmp(exec_node->args[0], "cd") == 0
 			|| ft_strcmp(exec_node->args[0], "export") == 0
 			|| ft_strcmp(exec_node->args[0], "unset") == 0)
@@ -47,7 +47,7 @@ int	is_env_builtin(t_ast *tree)
 void	run_tree(t_ast *tree, t_data *data, t_env_node **env_list)
 {
 	int	return_status;
-	
+
 	return_status = 0;
 	if (tree->type == CMD)
 		run_exec(tree, env_list);
@@ -55,6 +55,7 @@ void	run_tree(t_ast *tree, t_data *data, t_env_node **env_list)
 		run_redir(tree, data, env_list);
 	else if (tree->type == PIPE)
 		return_status = run_pipe(tree, data, env_list);
+	free_all (&data, tree, NULL);
 	exit (return_status);
 }
 
@@ -65,7 +66,6 @@ void	fork_and_exec(t_ast *tree, t_data *data, t_env_node **env_list)
 
 	pid = 0;
 	pid = ft_fork();
-//	signal(SIGINT, signal_routine_child);
 	if (pid == 0)
 		run_tree(tree, data, env_list);
 	else if (pid > 0)

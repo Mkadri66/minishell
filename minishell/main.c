@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:05:14 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/01 21:43:31 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:29:06 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
-# include "./includes/parsing.h"
-# include "./includes/builtins.h"
-# include "./includes/run.h"
+#include "./includes/parsing.h"
+#include "./includes/builtins.h"
+#include "./includes/run.h"
 
 int	g_exit_status;
 
-int input_empty(char *input)
+int	input_empty(char *input)
 {
 	int	i;
 
@@ -29,12 +29,12 @@ int input_empty(char *input)
 	}
 	return (true);
 }
+
 void	handle_input(t_data *data, t_env_node **env_list, char **input)
 {
 	t_ast	*tree;
-	
+
 	tree = NULL;
-	
 	if (is_input_exit (*input, data) == 1)
 	{
 		add_history (*input);
@@ -47,15 +47,14 @@ void	handle_input(t_data *data, t_env_node **env_list, char **input)
 		free_tree (tree);
 		free (data->new_input);
 		free (*input);
-//		print_tree (tree);
 	}
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data	*data;
-	t_env_node *env_list;
-	char	*input;
+	t_data		*data;
+	t_env_node	*env_list;
+	char		*input;
 
 	if (!init_data (&data, &env_list, env, argc))
 		return (1);
@@ -69,8 +68,6 @@ int	main(int argc, char **argv, char **env)
 		if (input_empty (input))
 			continue ;
 		handle_input (data, &env_list, &input);
-//		add_history (input);
-//		parse_input (data, input);
 	}
 	rl_clear_history ();
 	(void)argv;

@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:57:57 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/29 17:28:05 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:21:47 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ char	*replace_dollar(char **input, t_data *data);
 void	free_data(t_data *data);
 void	free_tree(t_ast *tree);
 void	free_all(t_data **data, t_ast *tree, char **input);
-int	error_exit(char *s);
+int		error_exit(char *s);
 
 /* Init_data */
-int	init_data(t_data **data, t_env_node **env_list, char **env, int argc);
+int		init_data(t_data **data, t_env_node **env_list, char **env, int argc);
 
 /* Lexing */
-int	parse_input(t_data *data, char **input, t_ast **tree);
+int		parse_input(t_data *data, char **input, t_ast **tree);
 
 /* Nulterminate */
 t_ast	*nulterminate(t_ast *tree, t_data *data);
@@ -43,8 +43,9 @@ t_ast	*nulterminate(t_ast *tree, t_data *data);
 t_ast	*parse_pipe(char **s_input, char *e_input, t_data *data);
 
 /* Token */
-int	get_token(char **s_input, char *e_input, char **s_token, char **e_token);
-int	peek(char **s_input, char *e_input, char *c);
+int		get_token(char **s_input, char *e_input, char **s_token, \
+char **e_token);
+int		peek(char **s_input, char *e_input, char *c);
 
 /* Utils_parse */
 bool	unclosed_pipe(char *input);
@@ -62,7 +63,7 @@ bool	contain_quote(char *str, char *quote);
 /* Utils_redir */
 void	init_redir(int type, t_ast *node);
 t_ast	*multiple_redir(t_ast *old, t_ast *new);
-int	check_next_token(char *s_input, char *e_input);
+int		check_next_token(char *s_input, char *e_input);
 
 /* Test */
 void	print_env(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 16:24:04 by momillio          #+#    #+#             */
-/*   Updated: 2024/09/30 15:03:46 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:24:39 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	nulterminate_cmd(t_ast *node, t_data *data)
 		data->nb_cmd += 1;
 		while (node->content.cmd_node.args[i])
 		{
-		//	printf ("here");
-		*(node->content.cmd_node.e_args[i]) = 0;
-		//	printf ("cmd = %s\n", node->content.cmd_node.args[i]);
+			*(node->content.cmd_node.e_args[i]) = 0;
 			i++;
 		}
 		if (is_builtin (node->content.cmd_node.args[0]))

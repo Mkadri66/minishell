@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: momillio <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/01 21:43:11 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:26:52 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/run.h"
-# include "../includes/builtins.h"
+#include "../includes/builtins.h"
 
 char	*get_env_path(t_env_node *env_list)
 {

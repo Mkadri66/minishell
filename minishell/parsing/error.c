@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:19:54 by momillio          #+#    #+#             */
-/*   Updated: 2024/10/02 10:24:00 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:42:51 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	free_tree(t_ast *tree)
 
 void	free_all(t_data **data, t_ast *tree, char **input)
 {
-	if (*input)
+	if (input)
 		free (*input);
 	if (*data)
 		free_data (*data);

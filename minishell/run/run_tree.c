@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/02 10:27:18 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:47:59 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	fork_and_exec(t_ast *tree, t_data *data, t_env_node **env_list)
 	pid = 0;
 	pid = ft_fork();
 	if (pid == 0)
+	{
 		run_tree(tree, data, env_list);
+		free_all (&data, tree, NULL);
+	}
 	else if (pid > 0)
 	{
 		while (waitpid(pid, &status, 0) == -1)

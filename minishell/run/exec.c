@@ -6,7 +6,7 @@
 /*   By: momillio <momillio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:07 by mkadri            #+#    #+#             */
-/*   Updated: 2024/10/02 10:26:52 by momillio         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:40:28 by momillio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,5 @@ void	run_exec(t_ast *tree, t_env_node **env_list)
 			}
 		}
 	}
-	free (tree);
+//	free (tree);
 }
